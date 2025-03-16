@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: odoo
+  namespace: odoo
+  labels:
+    app: odoo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: odoo
+  template:
+    metadata:
+      labels:
+        app: odoo
+    spec:
+      containers:
+      - name: odoo
+        image: odoo:16  # 📌 Modifier la version si besoin
+        ports:
+        - containerPort: 8069
+        env:
+        - name: HOST
+          value: "postgres-odoo"
+        - name: USER
+          value: "odoo"
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: password
+        - name: PGDATABASE
+          value: "odoo_db"
+        volumeMounts:
+        - name: odoo-data
+          mountPath: /var/lib/odoo
+      volumes:
+      - name: odoo-data
+        persistentVolumeClaim:
+          claimName: odoo-pvc

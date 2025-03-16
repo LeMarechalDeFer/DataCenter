@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-odoo-pvc
+  name: postgres-odoo-pv
   namespace: databases-odoo
 spec:
   storageClassName: local-storage
