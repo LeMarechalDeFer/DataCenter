@@ -21,3 +21,5 @@
 #   - hosts:
 #     - odoo.tondomaine.com
 #     secretName: odoo-tls
+
+# kubectl apply -f k8s-infra/apps/odoo/ingress.yaml

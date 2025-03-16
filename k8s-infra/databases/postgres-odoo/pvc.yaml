@@ -4,6 +4,7 @@ metadata:
   name: postgres-odoo-pvc
   namespace: databases-odoo
 spec:
+  storageClassName: local-storage
   accessModes:
     - ReadWriteOnce
   resources:
